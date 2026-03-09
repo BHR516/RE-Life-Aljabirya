@@ -3,25 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RE-LIFE الجابرية | مستقبل مستدام</title>
+    <title>RE-LIFE Aljabirya | مستقبل مستدام</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        :root { --green: #2e7d32; --light-green: #f0f7f0; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background-color: var(--light-green); color: #333; }
-        header { background: var(--green); color: white; padding: 20px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .container { max-width: 600px; margin: 20px auto; padding: 20px; background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .chat-area { border: 1px solid #ddd; height: 300px; overflow-y: auto; padding: 15px; margin-bottom: 15px; border-radius: 10px; background: #fafafa; text-align: right; }
-        input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
-        button { width: 100%; padding: 12px; background: var(--green); color: white; border: none; border-radius: 8px; margin-top: 10px; cursor: pointer; font-size: 16px; font-weight: bold; }
-        button:hover { background: #1b5e20; }
-        .bot-msg { background: #e8f5e9; padding: 10px; border-radius: 10px; margin-bottom: 10px; display: inline-block; width: 90%; }
+        body { font-family: 'Tajawal', sans-serif; background-color: #f8fafc; }
+        .gradient-text { background: linear-gradient(90deg, #10b981, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .card-bento { background: white; border-radius: 2rem; padding: 2rem; border: 1px solid #f1f5f9; transition: all 0.3s ease; }
+        .card-bento:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+        .chat-msg { max-width: 85%; padding: 1rem; border-radius: 1.2rem; margin-bottom: 1rem; }
+        .user-msg { background: #059669; color: white; border-top-right-radius: 0; margin-right: auto; }
+        .ai-msg { background: white; color: #1e293b; border-top-left-radius: 0; border: 1px solid #e2e8f0; }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>RE-LIFE الجابرية ♻️</h1>
-    <p>نحو مستقبل مستدام لمملكة البحرين</p>
-</header>
+    <nav class="fixed top-0 left-0 right-0 z-[100] glass px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+            <div class="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center text-white">
+                <i data-lucide="recycle"></i>
+            </div>
+            <span class="text-xl font-bold text-emerald-900">RE-LIFE Aljabirya</span>
+        </div>
+        <button onclick="document.getElementById('chat-container').classList.toggle('hidden')" class="p-2 text-emerald-900 bg-emerald-50 rounded-xl">
+            <i data-lucide="message-square"></i>
+        </button>
+    </nav>
 
-<div class="container">
-    <h3>اسأل
+    <section class="pt-32 pb-20 px-6 bg-[#022C22] text-white overflow-hidden relative">
+        <div class="max-w-6xl mx-auto relative z-10 text-center md:text-right">
+            <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight">
+                أعد تعريف <br><span class="gradient-text">مستقبل بيئتك</span>
+            </h1>
+            <p class="text-xl text-emerald-100/70 mb-10 max-w-2xl">نحن ندمج الذكاء الاصطناعي مع الوعي البيئي في الجابرية لنخلق عالماً خالياً من الهدر.</p>
+            <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+                <button class="bg-emerald-500 text-emerald-950 px-8 py-4 rounded-2xl font-bold">ابدأ الاستكشاف</button>
+                <button class="bg-white/10 text-white px-8 py-4 rounded-2xl font-bold backdrop-blur-md">تعرف على المواد</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-6xl mx-auto px-6 py-20">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-slate-900">حاسبة الأثر البيئي</h2>
+            <p class="text-slate-500">كم وفرت للجابرية اليوم؟</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="card-bento space-y-8">
+                <div>
+                    <label class="block text-sm font-bold mb-4">بلاستيك (كجم)</label>
+                    <input type="range" min="0" max="50" value="10" class="w-full h-2 bg-emerald-100 rounded-lg appearance-none cursor-pointer" id="plasticRange" oninput="updateImpact()">
+                </div>
+                <div>
+                    <label class="block text-sm font-bold mb-4">ورق (كجم)</label>
+                    <input type="range" min="0" max="50" value="5" class="w-full h-2 bg-emerald-100 rounded-lg appearance-none cursor-pointer" id="paperRange" oninput="updateImpact()">
+                </div>
+            </div>
+            <div class="bg-emerald-900 rounded-[2rem] p-10 text-white">
+                <h3 class="text-xl font-bold mb-8">بصمتك الإيجابية:</h3>
+                <div class="space-y-6">
+                    <div class="flex justify-between items-center">
+                        <span>توفير الطاقة (kWh)</span>
+                        <span id="energyVal" class="text-2xl font-bold">57</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span>إنقاذ الأشجار</span>
+                        <span id="treesVal" class="text-2xl font-bold">0.1</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="chat-container" class="fixed bottom-24 left-6 z-[200] w-[350px] md:w-[400px] h-[500px] bg-white rounded-[2rem] shadow-2xl border border-slate-100 hidden flex flex-col overflow-hidden">
+        <div class="bg-emerald-600 p-4 text-white flex justify-between items-center">
+            <span class="font-bold">خبير الجابرية الذكي</span>
+            <button onclick="document.getElementById('chat-container').classList.add('hidden')">✕</button>
+        </div>
+        <div id="chat-box" class="flex-grow p-4 overflow-y-auto bg-slate-50 space-y-4">
+            <div class="chat-msg ai-msg">أهلاً بك! أنا مساعدك الذكي في منطقة الجابرية. كيف يمكنني مساعدتك في إعادة التدوير اليوم؟</div>
+        </div>
+        <div class="p-4 bg-white border-t border-slate-100 flex gap-2">
+            <input type="text" id="chatInput" placeholder="اسأل عن أي مادة..." class="flex-grow p-3 bg-slate-100 rounded-xl outline-none text-sm">
+            <button onclick="askAI()" class="bg-emerald-600 text-white p-3 rounded-xl">ارسل</button>
+        </div>
+    </div>
+
+    <script>
+        // تفعيل الأيقونات
+        lucide.createIcons();
+
+        // حاسبة الأثر
+        function updateImpact() {
+            const plastic = document.getElementById('plasticRange').value;
+            const paper = document.getElementById('paperRange').value;
+            
+            document.getElementById('energyVal').innerText = (plastic * 5.7 + paper * 4).toFixed(1);
+            document.getElementById('treesVal').innerText = (paper * 0.017).toFixed(2);
+        }
+
+        // الدردشة الذكية
+        async function askAI() {
+            const input = document.getElementById('chatInput');
+            const box = document.getElementById('chat-box');
+            if(!input.value) return;
+
+            // إضافة رسالة المستخدم
+            box.innerHTML += `<div class="chat-msg user-msg">${input.value}</div>`;
+            const userQuery = input.value;
+            input.value = "";
+            box.scrollTop = box.scrollHeight;
+
+            // استبدل المفتاح أدناه بمفتاحك الخاص
+            const apiKey = "ضع_مفتاح_API_الخاص_بك_هنا"; 
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: userQuery + " (أجب باختصار بلهجة بحرينية ودودة حول تدوير النفايات في الجابرية، البحرين)" }] }]
+                    })
+                });
+                const data = await response.json();
+                const aiResponse = data.candidates[0].content.parts[0].text;
+                box.innerHTML += `<div class="chat-msg ai-msg">${aiResponse}</div>`;
+            } catch (e) {
+                box.innerHTML += `<div class="chat-msg ai-msg text-red-500">عذراً، تأكد من وضع مفتاح API بشكل صحيح.</div>`;
+            }
+            box.scrollTop = box.scrollHeight;
+        }
+    </script>
+</body>
+</html>
